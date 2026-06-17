@@ -351,6 +351,21 @@
       background: rgba(79,127,255,0.1); border: 1px solid rgba(79,127,255,0.2);
       padding: 3px 11px; border-radius: 100px;
     }
+    .tl-role.contract {
+      color: var(--cyan); background: rgba(0,217,255,0.1); border-color: rgba(0,217,255,0.25);
+    }
+    .tl-role.fulltime {
+      color: #00E887; background: rgba(0,232,135,0.1); border-color: rgba(0,232,135,0.25);
+    }
+    .tl-projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 16px; }
+    .tl-project {
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px;
+      transition: border-color .25s, background .25s;
+    }
+    .tl-project:hover { border-color: rgba(79,127,255,0.3); background: rgba(79,127,255,0.04); }
+    .tl-project-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .tl-project-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
     .tl-date { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-left: auto; }
     .tl-ul { list-style: none; margin-top: 10px; }
     .tl-ul li {
@@ -804,17 +819,28 @@
         <div class="tl-dot"></div>
         <div class="tl-meta">
           <span class="tl-co">Yahoo</span>
-          <span class="tl-role">Senior Software Engineer</span>
+          <span class="tl-role contract">Contract · Senior Engineer</span>
           <span class="tl-date">2025 – Present</span>
         </div>
-        <ul class="tl-ul">
-          <li>Architected <strong>Oracle Protocol</strong> — autonomous multi-agent coding framework with hierarchical Oracle → Manager → Lead → Coder execution, evidence-gated bug-fix workflow (reproduce → fix → verify), and a SQLite-backed code knowledge graph over the Python source tree</li>
-          <li>Built <strong>App Flow Graph</strong> — production 134-screen, 220-edge application map derived from static analysis (not hand-drawn), live emulator capture engine over ADB, won internal A/B against legacy tool, shipped to production as PR #159</li>
-          <li>Authored <strong>Epic MA-37920</strong> — 11-ticket cross-platform instrumentation program coordinating Android, iOS, web, and analytics teams for the Yahoo Mail Sign-in-with-Google funnel against a hard Benzene-EOL deadline</li>
-          <li>Published a 4 GB MLX model to internal Artifactory; diagnosed multi-stage failure mode (proxy throttling, cert TTL, opaque naming) and authored the canonical team guide for MLX publishing</li>
-          <li>Built cloud-emulator provisioning kit: nested-virt GCE + containerized Android emulator over IAP tunnel with serial-agnostic capture pipeline</li>
-        </ul>
-        <div class="tl-chips">
+        <div class="tl-projects">
+          <div class="tl-project">
+            <div class="tl-project-name">🤖 Oracle Protocol</div>
+            <div class="tl-project-desc">Autonomous multi-agent coding framework — Oracle → Manager → Lead → Coder hierarchy with phase-gated, evidence-enforced execution and a SQLite-backed code knowledge graph. Resolved deep reliability bugs: agent self-recursion, inter-agent deadlocks, venv bootstrap failures.</div>
+          </div>
+          <div class="tl-project">
+            <div class="tl-project-name">🗺️ App Flow Graph</div>
+            <div class="tl-project-desc">134-screen, 220-edge production map of Yahoo Mail derived from static analysis — not hand-drawn. Live emulator capture engine over ADB with ANR self-healing. Won internal A/B vs. legacy tool, shipped to production as PR #159.</div>
+          </div>
+          <div class="tl-project">
+            <div class="tl-project-name">🔑 Epic MA-37920</div>
+            <div class="tl-project-desc">11-ticket identity instrumentation program for Yahoo Mail Sign-in-with-Google funnel. Coordinated Android, iOS, web, and analytics teams against a hard Benzene-EOL deadline. 30+ unit tests, survived two rounds of adversarial review.</div>
+          </div>
+          <div class="tl-project">
+            <div class="tl-project-name">☁️ Cloud Emulator Kit</div>
+            <div class="tl-project-desc">Containerized Android emulator on nested-virt GCE, driven over IAP tunnel. Serial-agnostic capture pipeline for headless automated testing at cloud scale. Also published 4 GB MLX model to Artifactory with canonical team guide.</div>
+          </div>
+        </div>
+        <div class="tl-chips" style="margin-top:16px">
           <span class="tl-chip">Python</span>
           <span class="tl-chip">Kotlin</span>
           <span class="tl-chip">Multi-Agent AI</span>
@@ -830,7 +856,7 @@
         <div class="tl-dot"></div>
         <div class="tl-meta">
           <span class="tl-co">Meta / Instagram</span>
-          <span class="tl-role">Staff Android Engineer</span>
+          <span class="tl-role fulltime">Full-Time · Staff Android Engineer</span>
           <span class="tl-date">Mar 2022 – Sep 2025</span>
         </div>
         <ul class="tl-ul">
@@ -1119,12 +1145,12 @@
     <div class="co-grid">
       <div class="co-card reveal d1">
         <div class="co-name">Yahoo</div>
-        <div class="co-role">Senior Software Engineer</div>
+        <div class="co-role">Senior Engineer · <span style="color:var(--cyan)">Contract</span></div>
         <div class="co-date">2025 – Present</div>
       </div>
       <div class="co-card reveal d2">
         <div class="co-name">Meta</div>
-        <div class="co-role">Staff Android Engineer</div>
+        <div class="co-role">Staff Android Engineer · <span style="color:#00E887">Full-Time</span></div>
         <div class="co-date">Mar 2022 – Sep 2025</div>
       </div>
       <div class="co-card reveal d3">
