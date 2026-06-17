@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benjamin Harvey — Staff Engineer · AI Systems · Mobile Platforms</title>
+  <meta name="description" content="Staff Software Engineer specializing in Android platforms, autonomous AI agent systems, and developer tooling. 10+ years building for 2B+ users. Available via Harvey AI LLC / Toptal.">
+  <meta property="og:title" content="Benjamin Harvey — Staff Engineer">
+  <meta property="og:description" content="Building world-class systems with AI. 2B+ users. $50M+ savings. 10 years of scale.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #06060f;
+      --bg2: #09091a;
+      --bg-card: rgba(255,255,255,0.025);
+      --bg-card-h: rgba(79,127,255,0.05);
+      --border: rgba(255,255,255,0.07);
+      --border-h: rgba(79,127,255,0.4);
+      --accent: #4F7FFF;
+      --accent-dim: rgba(79,127,255,0.12);
+      --cyan: #00D9FF;
+      --purple: #9B7AFF;
+      --text: #E2E2F0;
+      --muted: #6868A0;
+      --font: 'Inter', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --r: 12px;
+      --r-lg: 20px;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: rgba(79,127,255,0.3); color: #fff; }
+
+    /* SCROLL PROGRESS */
+    #progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--cyan));
+      z-index: 9999; pointer-events: none;
+    }
+
+    /* CURSOR GLOW */
+    #cursor {
+      position: fixed; width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,127,255,0.05) 0%, transparent 65%);
+      pointer-events: none; transform: translate(-50%,-50%); z-index: 0;
+      transition: opacity .4s;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      background: rgba(6,6,15,0.85);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .n-logo {
+      font-family: var(--mono); font-size: 15px; font-weight: 700;
+      color: var(--text); text-decoration: none; letter-spacing: 0.04em;
+    }
+    .n-logo em { color: var(--accent); font-style: normal; }
+
+    .n-links { display: flex; gap: 36px; list-style: none; }
+    .n-links a {
+      font-size: 13px; font-weight: 500; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.02em;
+      transition: color .25s var(--ease); position: relative;
+    }
+    .n-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--accent); transition: width .3s var(--ease);
+    }
+    .n-links a:hover, .n-links a.active { color: var(--text); }
+    .n-links a:hover::after, .n-links a.active::after { width: 100%; }
+
+    .n-cta {
+      font-size: 13px; font-weight: 600; color: #fff;
+      background: var(--accent); border: none; padding: 9px 22px;
+      border-radius: 8px; cursor: pointer; text-decoration: none;
+      transition: background .25s, transform .25s, box-shadow .25s;
+    }
+    .n-cta:hover { background: #6B93FF; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(79,127,255,0.35); }
+
+    /* HERO */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden; padding-top: 64px;
+    }
+
+    #hero-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+    }
+
+    .h-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(79,127,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,127,255,0.022) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+
+    .orb {
+      position: absolute; border-radius: 50%; pointer-events: none; filter: blur(70px);
+    }
+    .orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(79,127,255,0.1) 0%, transparent 70%); top: -250px; left: -150px; }
+    .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(155,122,255,0.08) 0%, transparent 70%); bottom: -100px; right: -80px; }
+    .orb-3 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(0,217,255,0.06) 0%, transparent 70%); top: 45%; left: 58%; }
+
+    .h-content { position: relative; z-index: 2; max-width: 920px; padding: 0 24px; }
+
+    .h-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(79,127,255,0.08); border: 1px solid rgba(79,127,255,0.25);
+      border-radius: 100px; padding: 7px 18px;
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+    .h-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #00FF88; box-shadow: 0 0 8px #00FF88;
+      animation: blink 2.2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+    .h-name {
+      font-size: clamp(54px, 8.5vw, 100px); font-weight: 900;
+      letter-spacing: -0.035em; line-height: 1; margin-bottom: 22px;
+      background: linear-gradient(145deg, #ffffff 0%, #d0dcff 55%, #8ebaff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .h-title {
+      font-family: var(--mono); font-size: clamp(13px, 1.8vw, 17px);
+      color: var(--accent); letter-spacing: 0.08em; margin-bottom: 28px; font-weight: 500;
+    }
+
+    .h-tagline {
+      font-size: clamp(16px, 2.2vw, 21px); color: var(--muted);
+      max-width: 620px; margin: 0 auto 52px; line-height: 1.65; font-weight: 400;
+    }
+    .h-tagline strong { color: var(--text); font-weight: 600; }
+
+    .h-metrics {
+      display: flex; justify-content: center; align-items: center;
+      gap: 0; margin-bottom: 52px;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: var(--r-lg); overflow: hidden; width: fit-content; margin-left: auto; margin-right: auto;
+    }
+    .h-metric {
+      padding: 20px 32px; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .h-metric:last-child { border-right: none; }
+    .h-metric-val {
+      font-family: var(--mono); font-size: 26px; font-weight: 700;
+      color: var(--cyan); display: block; line-height: 1;
+    }
+    .h-metric-label {
+      font-size: 10px; color: var(--muted); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-top: 6px; display: block;
+    }
+
+    .h-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-p {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #fff; font-size: 14px; font-weight: 600;
+      padding: 14px 28px; border-radius: 10px; text-decoration: none;
+      border: none; cursor: pointer; letter-spacing: 0.02em;
+      transition: background .25s, transform .25s, box-shadow .25s;
+    }
+    .btn-p:hover { background: #6B93FF; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(79,127,255,0.4); }
+
+    .btn-s {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--text); font-size: 14px; font-weight: 600;
+      padding: 14px 28px; border-radius: 10px; text-decoration: none;
+      border: 1px solid var(--border); cursor: pointer; letter-spacing: 0.02em;
+      transition: border-color .25s, background .25s, transform .25s;
+    }
+    .btn-s:hover { border-color: var(--border-h); background: var(--accent-dim); transform: translateY(-2px); }
+
+    .h-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--muted); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; animation: bobble 2.5s ease-in-out infinite;
+    }
+    @keyframes bobble { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
+
+    /* TICKER */
+    #ticker {
+      padding: 18px 0; overflow: hidden;
+      background: rgba(79,127,255,0.03);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .t-track {
+      display: flex; animation: tick 45s linear infinite; width: max-content;
+    }
+    .t-item {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 0 28px; font-family: var(--mono); font-size: 11px;
+      color: var(--muted); white-space: nowrap; letter-spacing: 0.05em;
+    }
+    .t-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--accent); opacity: 0.5; flex-shrink: 0; }
+    @keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* STATS */
+    #stats { padding: 100px 0; }
+    .s-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      background: var(--border); border: 1px solid var(--border);
+      border-radius: var(--r-lg); overflow: hidden; gap: 1px;
+    }
+    .stat {
+      background: var(--bg2); padding: 44px 28px; text-align: center;
+      transition: background .3s;
+    }
+    .stat:hover { background: rgba(79,127,255,0.06); }
+    .stat-val {
+      font-family: var(--mono); font-size: 42px; font-weight: 700; line-height: 1;
+      background: linear-gradient(135deg, var(--cyan), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 10px; display: block;
+    }
+    .stat-lbl { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.5; }
+
+    /* SECTION COMMONS */
+    .sec { position: relative; }
+    .inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .s-label {
+      font-family: var(--mono); font-size: 11px; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .s-title {
+      font-size: clamp(28px, 4vw, 46px); font-weight: 800;
+      letter-spacing: -0.025em; line-height: 1.12; margin-bottom: 16px;
+    }
+    .s-desc { font-size: 16px; color: var(--muted); max-width: 540px; line-height: 1.75; }
+
+    /* ABOUT */
+    #about { padding: 130px 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .about-text p { color: var(--muted); font-size: 16px; line-height: 1.85; margin-bottom: 18px; }
+    .about-text p strong { color: var(--text); font-weight: 600; }
+    .about-quote {
+      margin-top: 32px; padding: 22px 24px;
+      border-left: 2px solid var(--accent); background: rgba(79,127,255,0.05);
+      border-radius: 0 8px 8px 0; font-size: 15px; color: var(--text);
+      font-style: italic; line-height: 1.7;
+    }
+    .about-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 32px; backdrop-filter: blur(12px);
+      position: sticky; top: 88px;
+    }
+    .ac-title {
+      font-family: var(--mono); font-size: 11px; color: var(--accent);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 22px;
+    }
+    .ac-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .ac-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .ac-icon {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: rgba(79,127,255,0.1); display: flex; align-items: center;
+      justify-content: center; font-size: 15px; flex-shrink: 0;
+    }
+    .ac-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .ac-text strong { color: var(--text); font-size: 14px; font-weight: 600; display: block; margin-bottom: 2px; }
+
+    /* SKILLS */
+    #skills { padding: 130px 0; background: linear-gradient(180deg, transparent 0%, var(--bg2) 40%, var(--bg2) 60%, transparent 100%); }
+    .skills-header { margin-bottom: 56px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .sk-cat {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 32px;
+      transition: border-color .3s, background .3s, transform .3s, box-shadow .3s;
+    }
+    .sk-cat:hover {
+      border-color: rgba(79,127,255,0.3); background: var(--bg-card-h);
+      transform: translateY(-3px); box-shadow: 0 16px 50px rgba(0,0,0,0.35), 0 0 30px rgba(79,127,255,0.08);
+    }
+    .sk-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .sk-icon {
+      width: 42px; height: 42px; border-radius: 11px;
+      background: rgba(79,127,255,0.1); display: flex; align-items: center;
+      justify-content: center; font-size: 20px;
+    }
+    .sk-name { font-size: 16px; font-weight: 700; color: var(--text); }
+    .sk-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .sk-tag {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      padding: 5px 11px; border-radius: 6px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--muted); cursor: default;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .sk-tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(79,127,255,0.08); }
+
+    /* TIMELINE */
+    #experience { padding: 130px 0; }
+    .tl-header { margin-bottom: 72px; }
+    .tl {
+      position: relative; padding-left: 44px;
+    }
+    .tl::before {
+      content: ''; position: absolute; left: 4px; top: 8px; bottom: 8px; width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--accent) 8%, var(--accent) 92%, transparent);
+      opacity: 0.25;
+    }
+    .tl-entry {
+      position: relative; padding-bottom: 64px;
+    }
+    .tl-entry:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -40px; top: 7px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+      box-shadow: 0 0 14px rgba(79,127,255,0.55);
+    }
+    .tl-meta {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .tl-co { font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.01em; }
+    .tl-role {
+      font-size: 12px; font-weight: 600; color: var(--accent);
+      background: rgba(79,127,255,0.1); border: 1px solid rgba(79,127,255,0.2);
+      padding: 3px 11px; border-radius: 100px;
+    }
+    .tl-date { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-left: auto; }
+    .tl-ul { list-style: none; margin-top: 10px; }
+    .tl-ul li {
+      position: relative; padding-left: 18px; margin-bottom: 9px;
+      font-size: 14px; color: var(--muted); line-height: 1.65;
+    }
+    .tl-ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; top: 3px; }
+    .tl-ul li strong { color: var(--text); font-weight: 600; }
+    .tl-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+    .tl-chip {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      padding: 3px 9px; border-radius: 5px;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--muted);
+    }
+
+    /* PROJECTS */
+    #projects { padding: 130px 0; background: linear-gradient(180deg, transparent, rgba(79,127,255,0.015), transparent); }
+    .proj-header { margin-bottom: 56px; }
+    .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+    .proj-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 32px; cursor: default;
+      transition: border-color .3s, background .3s, box-shadow .3s, transform .3s;
+    }
+    .proj-card:hover {
+      border-color: rgba(79,127,255,0.35); background: rgba(79,127,255,0.04);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 40px rgba(79,127,255,0.09);
+    }
+    .proj-card.wide { grid-column: span 2; }
+
+    .proj-icon {
+      width: 50px; height: 50px; border-radius: 13px;
+      background: rgba(79,127,255,0.1); display: flex; align-items: center;
+      justify-content: center; font-size: 24px; margin-bottom: 22px;
+    }
+    .proj-title { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.01em; margin-bottom: 6px; }
+    .proj-co { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+    .proj-desc { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 22px; }
+    .proj-desc strong { color: var(--text); font-weight: 600; }
+    .proj-nums { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+    .proj-num { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--cyan); }
+    .proj-num span { color: var(--muted); font-size: 10px; font-weight: 400; display: block; margin-top: 2px; }
+    .proj-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .proj-chip {
+      font-family: var(--mono); font-size: 10px; padding: 3px 9px;
+      border-radius: 5px; background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border); color: var(--muted);
+    }
+
+    /* COMPANIES */
+    #companies { padding: 130px 0; }
+    .co-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 56px; }
+    .co-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 28px 22px; text-align: center;
+      transition: border-color .3s, background .3s, transform .3s, box-shadow .3s;
+    }
+    .co-card:hover {
+      border-color: rgba(79,127,255,0.3); background: var(--bg-card-h);
+      transform: translateY(-4px); box-shadow: 0 14px 44px rgba(0,0,0,0.35);
+    }
+    .co-name { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 5px; }
+    .co-role { font-size: 11px; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
+    .co-date { font-family: var(--mono); font-size: 10px; color: var(--muted); opacity: 0.6; }
+
+    /* CONTACT */
+    #contact { padding: 160px 0 130px; }
+    .contact-wrap { text-align: center; max-width: 720px; margin: 0 auto; }
+    .contact-title {
+      font-size: clamp(38px, 5.5vw, 64px); font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 22px;
+      background: linear-gradient(145deg, #ffffff 0%, #c8d6ff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .contact-desc { font-size: 18px; color: var(--muted); margin-bottom: 52px; line-height: 1.75; }
+    .contact-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 52px; }
+    .contact-meta { display: flex; align-items: center; gap: 36px; justify-content: center; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 12px; color: var(--muted);
+      text-decoration: none; transition: color .25s;
+    }
+    .contact-link:hover { color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      padding: 36px 48px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .f-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+    .f-links { display: flex; gap: 28px; }
+    .f-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .f-links a:hover { color: var(--text); }
+
+    /* REVEAL SYSTEM */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .65s var(--ease), transform .65s var(--ease);
+    }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+    .d4 { transition-delay: .4s; }
+
+    /* SCROLL MARGIN FOR FIXED NAV */
+    section[id] { scroll-margin-top: 80px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .proj-grid { grid-template-columns: repeat(2, 1fr); }
+      .proj-card.wide { grid-column: span 2; }
+      .co-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .n-links { display: none; }
+      .inner { padding: 0 20px; }
+      .s-inner { padding: 0 20px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-card { position: static; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .proj-card.wide { grid-column: span 1; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .co-grid { grid-template-columns: repeat(2, 1fr); }
+      .h-metrics { flex-direction: column; }
+      .h-metric { border-right: none; border-bottom: 1px solid var(--border); width: 100%; }
+      .h-metric:last-child { border-bottom: none; }
+      footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div id="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="n-logo">bh<em>.</em></a>
+  <ul class="n-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://www.toptal.com" target="_blank" rel="noopener" class="n-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="h-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="h-content">
+    <div class="h-badge">Available for Contract &nbsp;·&nbsp; Harvey AI LLC</div>
+    <h1 class="h-name">Benjamin Harvey</h1>
+    <div class="h-title">Staff Engineer &nbsp;·&nbsp; AI Systems &nbsp;·&nbsp; Mobile Platforms</div>
+    <p class="h-tagline">
+      Building <strong>world-class systems</strong> at scale — from autonomous AI agent frameworks
+      to mobile platforms serving <strong>2 billion users</strong>.
+    </p>
+
+    <div class="h-metrics">
+      <div class="h-metric">
+        <span class="h-metric-val">2B+</span>
+        <span class="h-metric-label">Users Reached</span>
+      </div>
+      <div class="h-metric">
+        <span class="h-metric-val">$50M+</span>
+        <span class="h-metric-label">Savings Generated</span>
+      </div>
+      <div class="h-metric">
+        <span class="h-metric-val">180M</span>
+        <span class="h-metric-label">New Acquisitions</span>
+      </div>
+      <div class="h-metric">
+        <span class="h-metric-val">10+</span>
+        <span class="h-metric-label">Years Production</span>
+      </div>
+    </div>
+
+    <div class="h-ctas">
+      <a href="https://www.toptal.com" target="_blank" rel="noopener" class="btn-p">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Available via Toptal
+      </a>
+      <a href="#projects" class="btn-s">
+        View My Work
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="h-scroll">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    Scroll
+  </div>
+</section>
+
+<!-- TICKER -->
+<div id="ticker">
+  <div class="t-track" id="ticker-track">
+    <span class="t-item"><span class="t-dot"></span>Python</span>
+    <span class="t-item"><span class="t-dot"></span>Kotlin / Java</span>
+    <span class="t-item"><span class="t-dot"></span>TypeScript</span>
+    <span class="t-item"><span class="t-dot"></span>Go</span>
+    <span class="t-item"><span class="t-dot"></span>Android SDK</span>
+    <span class="t-item"><span class="t-dot"></span>Jetpack Compose</span>
+    <span class="t-item"><span class="t-dot"></span>Multi-Agent Orchestration</span>
+    <span class="t-item"><span class="t-dot"></span>LLM Application Design</span>
+    <span class="t-item"><span class="t-dot"></span>MCP Servers</span>
+    <span class="t-item"><span class="t-dot"></span>RAG Pipelines</span>
+    <span class="t-item"><span class="t-dot"></span>GCP · AWS · Kubernetes</span>
+    <span class="t-item"><span class="t-dot"></span>ADB / UIAutomator</span>
+    <span class="t-item"><span class="t-dot"></span>Terraform</span>
+    <span class="t-item"><span class="t-dot"></span>GitHub Actions</span>
+    <span class="t-item"><span class="t-dot"></span>SQLite Knowledge Graphs</span>
+    <span class="t-item"><span class="t-dot"></span>Espresso Instrumentation</span>
+    <span class="t-item"><span class="t-dot"></span>Screwdriver CI</span>
+    <span class="t-item"><span class="t-dot"></span>MLX Model Publishing</span>
+    <span class="t-item"><span class="t-dot"></span>Nested-Virt Cloud Emulation</span>
+    <!-- duplicate for seamless loop -->
+    <span class="t-item"><span class="t-dot"></span>Python</span>
+    <span class="t-item"><span class="t-dot"></span>Kotlin / Java</span>
+    <span class="t-item"><span class="t-dot"></span>TypeScript</span>
+    <span class="t-item"><span class="t-dot"></span>Go</span>
+    <span class="t-item"><span class="t-dot"></span>Android SDK</span>
+    <span class="t-item"><span class="t-dot"></span>Jetpack Compose</span>
+    <span class="t-item"><span class="t-dot"></span>Multi-Agent Orchestration</span>
+    <span class="t-item"><span class="t-dot"></span>LLM Application Design</span>
+    <span class="t-item"><span class="t-dot"></span>MCP Servers</span>
+    <span class="t-item"><span class="t-dot"></span>RAG Pipelines</span>
+    <span class="t-item"><span class="t-dot"></span>GCP · AWS · Kubernetes</span>
+    <span class="t-item"><span class="t-dot"></span>ADB / UIAutomator</span>
+    <span class="t-item"><span class="t-dot"></span>Terraform</span>
+    <span class="t-item"><span class="t-dot"></span>GitHub Actions</span>
+    <span class="t-item"><span class="t-dot"></span>SQLite Knowledge Graphs</span>
+    <span class="t-item"><span class="t-dot"></span>Espresso Instrumentation</span>
+    <span class="t-item"><span class="t-dot"></span>Screwdriver CI</span>
+    <span class="t-item"><span class="t-dot"></span>MLX Model Publishing</span>
+    <span class="t-item"><span class="t-dot"></span>Nested-Virt Cloud Emulation</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="s-inner reveal">
+    <div class="stats-grid">
+      <div class="stat">
+        <span class="stat-val" data-target="2" data-suffix="B+">0</span>
+        <span class="stat-lbl">Users on Platforms<br>I've Shipped</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val" data-prefix="$" data-target="50" data-suffix="M+">0</span>
+        <span class="stat-lbl">Annual Cost<br>Savings Driven</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val" data-target="180" data-suffix="M">0</span>
+        <span class="stat-lbl">New User Acquisitions<br>from Trial Reels</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val" data-target="15" data-suffix="M+">0</span>
+        <span class="stat-lbl">Lines Migrated to<br>Kotlin &amp; Compose</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val" data-target="10" data-suffix="+">0</span>
+        <span class="stat-lbl">Years Building<br>Production Systems</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="s-label">About</div>
+        <h2 class="s-title">Systems thinker.<br>Platform builder.</h2>
+        <p>
+          I'm a Staff Software Engineer with a decade of experience building production systems
+          that operate at global scale. My work spans <strong>Android platform engineering,
+          autonomous AI tooling, and distributed infrastructure</strong> — with a consistent
+          track record of shipping complex, high-stakes programs on time.
+        </p>
+        <p>
+          I led technical programs at <strong>Meta / Instagram</strong> on a 2B+ user platform,
+          built crash detection infrastructure saving an estimated $50M per year, and
+          technical-led the feature that drove <strong>180M new user acquisitions</strong>
+          in a single quarter.
+        </p>
+        <p>
+          At <strong>Yahoo via Toptal</strong>, I'm designing autonomous AI coding systems and
+          building production application-mapping infrastructure from scratch. My current focus
+          is multi-agent orchestration — systems where AI agents coordinate, verify each other's
+          work, and operate reliably without constant supervision.
+        </p>
+        <blockquote class="about-quote">
+          "The best engineers don't just write code — they build systems that outlive them."
+        </blockquote>
+      </div>
+      <div class="reveal d2">
+        <div class="about-card">
+          <div class="ac-title">// profile</div>
+          <div class="ac-row">
+            <div class="ac-icon">🏗️</div>
+            <div class="ac-text">
+              <strong>Current Role</strong>
+              Senior Engineer at Yahoo · Contracted via Toptal
+            </div>
+          </div>
+          <div class="ac-row">
+            <div class="ac-icon">🏢</div>
+            <div class="ac-text">
+              <strong>Entity</strong>
+              Harvey AI LLC — Independent Engineering
+            </div>
+          </div>
+          <div class="ac-row">
+            <div class="ac-icon">✅</div>
+            <div class="ac-text">
+              <strong>Toptal Network</strong>
+              Vetted top 3% — available for senior contracts
+            </div>
+          </div>
+          <div class="ac-row">
+            <div class="ac-icon">🎓</div>
+            <div class="ac-text">
+              <strong>Education</strong>
+              Computer Science, Towson University
+            </div>
+          </div>
+          <div class="ac-row">
+            <div class="ac-icon">🔗</div>
+            <div class="ac-text">
+              <strong>GitHub</strong>
+              github.com/bharv410
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="sec">
+  <div class="inner">
+    <div class="skills-header reveal">
+      <div class="s-label">Expertise</div>
+      <h2 class="s-title">The full stack.</h2>
+      <p class="s-desc">From on-device instrumentation to autonomous AI systems and cloud infrastructure.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="sk-cat reveal d1">
+        <div class="sk-head">
+          <div class="sk-icon">⚡</div>
+          <div class="sk-name">Languages</div>
+        </div>
+        <div class="sk-tags">
+          <span class="sk-tag">Python</span>
+          <span class="sk-tag">Kotlin</span>
+          <span class="sk-tag">Java</span>
+          <span class="sk-tag">TypeScript</span>
+          <span class="sk-tag">JavaScript</span>
+          <span class="sk-tag">Go</span>
+          <span class="sk-tag">SQL</span>
+          <span class="sk-tag">Bash / Shell</span>
+        </div>
+      </div>
+      <div class="sk-cat reveal d2">
+        <div class="sk-head">
+          <div class="sk-icon">📱</div>
+          <div class="sk-name">Mobile &amp; Android</div>
+        </div>
+        <div class="sk-tags">
+          <span class="sk-tag">Android SDK</span>
+          <span class="sk-tag">Jetpack Compose</span>
+          <span class="sk-tag">Flux Architecture</span>
+          <span class="sk-tag">ADB / UIAutomator</span>
+          <span class="sk-tag">Espresso</span>
+          <span class="sk-tag">Emulator Automation</span>
+          <span class="sk-tag">ViewModel / LiveData</span>
+          <span class="sk-tag">Coroutines</span>
+          <span class="sk-tag">Room DB</span>
+          <span class="sk-tag">Retrofit</span>
+          <span class="sk-tag">App Signing</span>
+          <span class="sk-tag">Mobile CI</span>
+        </div>
+      </div>
+      <div class="sk-cat reveal d3">
+        <div class="sk-head">
+          <div class="sk-icon">🤖</div>
+          <div class="sk-name">AI / ML Systems</div>
+        </div>
+        <div class="sk-tags">
+          <span class="sk-tag">Multi-Agent Orchestration</span>
+          <span class="sk-tag">LLM Application Design</span>
+          <span class="sk-tag">MCP Servers</span>
+          <span class="sk-tag">RAG Pipelines</span>
+          <span class="sk-tag">Code Knowledge Graphs</span>
+          <span class="sk-tag">MLX Model Publishing</span>
+          <span class="sk-tag">Autonomous Workflows</span>
+          <span class="sk-tag">Prompt Engineering</span>
+          <span class="sk-tag">Claude / OpenAI / Gemini</span>
+          <span class="sk-tag">Agentic Systems</span>
+        </div>
+      </div>
+      <div class="sk-cat reveal d4">
+        <div class="sk-head">
+          <div class="sk-icon">☁️</div>
+          <div class="sk-name">Cloud &amp; Infrastructure</div>
+        </div>
+        <div class="sk-tags">
+          <span class="sk-tag">GCP (GKE, BigQuery, GCE)</span>
+          <span class="sk-tag">AWS</span>
+          <span class="sk-tag">Kubernetes</span>
+          <span class="sk-tag">Terraform</span>
+          <span class="sk-tag">GitHub Actions</span>
+          <span class="sk-tag">Screwdriver CI</span>
+          <span class="sk-tag">Athenz / ZTS Auth</span>
+          <span class="sk-tag">Docker</span>
+          <span class="sk-tag">Nested Virtualization</span>
+          <span class="sk-tag">IAP Tunnels</span>
+          <span class="sk-tag">Artifactory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="experience" class="sec">
+  <div class="inner">
+    <div class="tl-header reveal">
+      <div class="s-label">Career</div>
+      <h2 class="s-title">10 years of scale.</h2>
+      <p class="s-desc">From Disney to Meta to autonomous AI systems — every stop shipped something that matters.</p>
+    </div>
+    <div class="tl">
+
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-co">Yahoo</span>
+          <span class="tl-role">Senior Software Engineer</span>
+          <span class="tl-date">2025 – Present</span>
+        </div>
+        <ul class="tl-ul">
+          <li>Architected <strong>Oracle Protocol</strong> — autonomous multi-agent coding framework with hierarchical Oracle → Manager → Lead → Coder execution, evidence-gated bug-fix workflow (reproduce → fix → verify), and a SQLite-backed code knowledge graph over the Python source tree</li>
+          <li>Built <strong>App Flow Graph</strong> — production 134-screen, 220-edge application map derived from static analysis (not hand-drawn), live emulator capture engine over ADB, won internal A/B against legacy tool, shipped to production as PR #159</li>
+          <li>Authored <strong>Epic MA-37920</strong> — 11-ticket cross-platform instrumentation program coordinating Android, iOS, web, and analytics teams for the Yahoo Mail Sign-in-with-Google funnel against a hard Benzene-EOL deadline</li>
+          <li>Published a 4 GB MLX model to internal Artifactory; diagnosed multi-stage failure mode (proxy throttling, cert TTL, opaque naming) and authored the canonical team guide for MLX publishing</li>
+          <li>Built cloud-emulator provisioning kit: nested-virt GCE + containerized Android emulator over IAP tunnel with serial-agnostic capture pipeline</li>
+        </ul>
+        <div class="tl-chips">
+          <span class="tl-chip">Python</span>
+          <span class="tl-chip">Kotlin</span>
+          <span class="tl-chip">Multi-Agent AI</span>
+          <span class="tl-chip">ADB / UIAutomator</span>
+          <span class="tl-chip">SQLite</span>
+          <span class="tl-chip">GCP</span>
+          <span class="tl-chip">Toptal</span>
+          <span class="tl-chip">MCP</span>
+        </div>
+      </div>
+
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-co">Meta / Instagram</span>
+          <span class="tl-role">Staff Android Engineer</span>
+          <span class="tl-date">Mar 2022 – Sep 2025</span>
+        </div>
+        <ul class="tl-ul">
+          <li>Led migration of <strong>15M+ lines of code</strong> to Kotlin + Jetpack Compose across the entire 2B+ user platform — crash rate -42%, startup time +35%</li>
+          <li>Built crash detection infrastructure processing <strong>500M+ daily events</strong>, reducing MTTD from 6 hours to 15 minutes — estimated $50M/year in savings</li>
+          <li>Technical lead for <strong>Trial Reels</strong> on a 25+ engineer cross-functional team — launched Q1 2024 and drove <strong>180M new user acquisitions</strong></li>
+          <li>Authored coroutine networking framework adopted by 8 product teams — API latency -28%, sustaining 10K+ req/sec at 99.99% uptime</li>
+          <li>Mentored 12 senior engineers; built ML-powered crash analysis platform; influenced technical direction across 40+ product teams</li>
+        </ul>
+        <div class="tl-chips">
+          <span class="tl-chip">Kotlin</span>
+          <span class="tl-chip">Jetpack Compose</span>
+          <span class="tl-chip">Android SDK</span>
+          <span class="tl-chip">Coroutines</span>
+          <span class="tl-chip">ML Infra</span>
+          <span class="tl-chip">Staff Lead</span>
+        </div>
+      </div>
+
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-co">Beachbody</span>
+          <span class="tl-role">Principal Android Engineer</span>
+          <span class="tl-date">Aug 2018 – Sep 2021</span>
+        </div>
+        <ul class="tl-ul">
+          <li>Designed unified super-app consolidating 3 legacy fitness apps (12M combined users) — infra costs cut by <strong>$2.3M/year</strong></li>
+          <li>Built AWS infrastructure supporting <strong>50K+ concurrent users</strong> at 99.95% uptime serving 8M+ DAU with &lt;100ms p95 latency</li>
+          <li>Delivered core feature platform: progress photos, media posting, meal logging, workout tracking</li>
+          <li>Overhauled CI/CD: build times -60%, deployments shifted from monthly to daily; adopted Jetpack (ViewModel, LiveData, Room) org-wide</li>
+        </ul>
+        <div class="tl-chips">
+          <span class="tl-chip">Kotlin</span>
+          <span class="tl-chip">AWS</span>
+          <span class="tl-chip">CI/CD</span>
+          <span class="tl-chip">Room</span>
+          <span class="tl-chip">ViewModel</span>
+        </div>
+      </div>
+
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-co">Wag Labs</span>
+          <span class="tl-role">Staff Android Engineer</span>
+          <span class="tl-date">Mar 2018 – Oct 2018</span>
+        </div>
+        <ul class="tl-ul">
+          <li>Pioneered Kotlin adoption on Android codebase — scaled platform from <strong>200K → 10M users</strong></li>
+          <li>Built server-driven UI framework enabling A/B testing without app releases — <strong>4× faster</strong> feature iteration velocity</li>
+          <li>Retrofit2 migration raised API reliability from 94% → <strong>99.7%</strong>; deep link + attribution layer drove user growth</li>
+        </ul>
+        <div class="tl-chips">
+          <span class="tl-chip">Kotlin</span>
+          <span class="tl-chip">Server-Driven UI</span>
+          <span class="tl-chip">Retrofit2</span>
+          <span class="tl-chip">Deep Links</span>
+        </div>
+      </div>
+
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-co">TigerConnect</span>
+          <span class="tl-role">Senior Android Engineer</span>
+          <span class="tl-date">Oct 2016 – Sep 2017</span>
+        </div>
+        <ul class="tl-ul">
+          <li>Rebuilt profile system with Material Design — memory footprint -30%, consistent <strong>60fps</strong> rendering</li>
+        </ul>
+        <div class="tl-chips">
+          <span class="tl-chip">Android</span>
+          <span class="tl-chip">Material Design</span>
+          <span class="tl-chip">Performance</span>
+        </div>
+      </div>
+
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-co">OneUni, Inc.</span>
+          <span class="tl-role">Lead Android Engineer</span>
+          <span class="tl-date">Dec 2015 – Jul 2016</span>
+        </div>
+        <ul class="tl-ul">
+          <li>Founded Android engineering practice from scratch; shipped full MVP in 4 months with OAuth, Twilio SDK, and dynamic content delivery</li>
+        </ul>
+        <div class="tl-chips">
+          <span class="tl-chip">Android</span>
+          <span class="tl-chip">OAuth</span>
+          <span class="tl-chip">Twilio</span>
+          <span class="tl-chip">MVP</span>
+        </div>
+      </div>
+
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-co">Walt Disney Studios</span>
+          <span class="tl-role">Android Engineer</span>
+          <span class="tl-date">Dec 2014 – Dec 2015</span>
+        </div>
+        <ul class="tl-ul">
+          <li>Shipped Disney Movies Anywhere — <strong>12M+ downloads</strong>; in-app purchase flows drove +25% digital sales across Disney's entire digital catalog</li>
+        </ul>
+        <div class="tl-chips">
+          <span class="tl-chip">Android</span>
+          <span class="tl-chip">In-App Purchases</span>
+          <span class="tl-chip">Digital Media</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec">
+  <div class="inner">
+    <div class="proj-header reveal">
+      <div class="s-label">Featured Work</div>
+      <h2 class="s-title">What I've built.</h2>
+      <p class="s-desc">Shipped systems with real, measurable impact — from autonomous AI agents to billion-user mobile platforms.</p>
+    </div>
+    <div class="proj-grid">
+
+      <div class="proj-card wide reveal tilt">
+        <div class="proj-icon">🤖</div>
+        <div class="proj-title">Oracle Protocol</div>
+        <div class="proj-co">Yahoo · Autonomous AI Tooling</div>
+        <p class="proj-desc">
+          Autonomous multi-agent coding framework with a four-tier hierarchy: Oracle → Manager → Lead → Coder.
+          Each layer operates with phase-gated execution — agents can't advance without presenting evidence of completion.
+          A <strong>SQLite-backed code knowledge graph</strong> over the entire Python source tree lets agents reason about
+          cross-file dependencies and promote learning across runs. Resumable workflows survive session failures.
+          Resolved three classes of deep reliability bugs: runaway self-recursion in agent spawning, inter-agent
+          communication deadlocks, and venv bootstrap failures — making fully autonomous, unsupervised coding
+          runs reliably production-safe.
+        </p>
+        <div class="proj-nums">
+          <div class="proj-num">4-tier<span>Agent Hierarchy</span></div>
+          <div class="proj-num">SQLite<span>Knowledge Graph</span></div>
+          <div class="proj-num">Evidence-Gated<span>Execution</span></div>
+          <div class="proj-num">Resumable<span>Workflows</span></div>
+        </div>
+        <div class="proj-chips">
+          <span class="proj-chip">Python</span>
+          <span class="proj-chip">Multi-Agent AI</span>
+          <span class="proj-chip">LLM Orchestration</span>
+          <span class="proj-chip">SQLite</span>
+          <span class="proj-chip">RAG</span>
+          <span class="proj-chip">Autonomous Systems</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d1 tilt">
+        <div class="proj-icon">🗺️</div>
+        <div class="proj-title">App Flow Graph</div>
+        <div class="proj-co">Yahoo · QA AI Platform</div>
+        <p class="proj-desc">
+          Zoomable production map of every Yahoo Mail screen — <strong>134 screens, 220 navigation edges</strong> —
+          derived from instrumentation source code rather than hand-drawn diagrams. Won an internal A/B
+          test against the legacy tool and shipped to production as PR #159. Includes static-analysis parsers
+          (Compose wireframe extraction, ScreenGraph parsing, Android manifest deep-link resolution, Flux
+          navigation extraction) and a live emulator capture engine that drives the UI over ADB, self-heals
+          from ANRs, and verifies captures against element inventories.
+        </p>
+        <div class="proj-nums">
+          <div class="proj-num">134<span>Screens Mapped</span></div>
+          <div class="proj-num">220<span>Nav Edges</span></div>
+        </div>
+        <div class="proj-chips">
+          <span class="proj-chip">Python</span>
+          <span class="proj-chip">ADB</span>
+          <span class="proj-chip">Static Analysis</span>
+          <span class="proj-chip">Emulator Automation</span>
+          <span class="proj-chip">Jetpack Compose</span>
+        </div>
+      </div>
+
+      <div class="proj-card wide reveal tilt">
+        <div class="proj-icon">📱</div>
+        <div class="proj-title">Trial Reels &amp; Instagram Platform</div>
+        <div class="proj-co">Meta / Instagram · Staff Android Technical Lead</div>
+        <p class="proj-desc">
+          Technical lead for Trial Reels on a 25+ engineer cross-functional team at Instagram.
+          Launched Q1 2024 — drove <strong>180M new user acquisitions</strong> in a single quarter.
+          Simultaneously led the platform-wide migration of <strong>15M+ lines of code</strong> to
+          Kotlin + Jetpack Compose across the entire 2B+ user application — crashes down 42%, startup
+          time up 35%. Built the coroutine networking framework that was adopted by 8 product teams,
+          processing 10K+ requests per second at 99.99% uptime with 28% latency reduction.
+          Mentored 12 senior engineers through the migration.
+        </p>
+        <div class="proj-nums">
+          <div class="proj-num">180M<span>New Acquisitions</span></div>
+          <div class="proj-num">2B+<span>User Platform</span></div>
+          <div class="proj-num">-42%<span>Crash Rate</span></div>
+          <div class="proj-num">+35%<span>Startup Speed</span></div>
+          <div class="proj-num">-28%<span>API Latency</span></div>
+        </div>
+        <div class="proj-chips">
+          <span class="proj-chip">Kotlin</span>
+          <span class="proj-chip">Jetpack Compose</span>
+          <span class="proj-chip">Coroutines</span>
+          <span class="proj-chip">Android SDK</span>
+          <span class="proj-chip">Staff Lead</span>
+          <span class="proj-chip">Cross-Functional</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d1 tilt">
+        <div class="proj-icon">🔥</div>
+        <div class="proj-title">Crash Detection Platform</div>
+        <div class="proj-co">Meta · Infrastructure</div>
+        <p class="proj-desc">
+          Crash detection infrastructure processing <strong>500M+ daily events</strong> across the
+          Instagram Android app. Reduced mean time to detect (MTTD) from 6 hours to 15 minutes.
+          Estimated annual engineering cost savings of $50M through faster incident response.
+          ML-powered crash analysis surfacing patterns across 40+ product teams.
+        </p>
+        <div class="proj-nums">
+          <div class="proj-num">500M+<span>Daily Events</span></div>
+          <div class="proj-num">6hr→15min<span>MTTD</span></div>
+          <div class="proj-num">$50M<span>Est. Annual Savings</span></div>
+        </div>
+        <div class="proj-chips">
+          <span class="proj-chip">ML</span>
+          <span class="proj-chip">Event Processing</span>
+          <span class="proj-chip">Android</span>
+          <span class="proj-chip">Infrastructure</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d2 tilt">
+        <div class="proj-icon">⚡</div>
+        <div class="proj-title">Beachbody Super-App</div>
+        <div class="proj-co">Beachbody · Principal Engineer</div>
+        <p class="proj-desc">
+          Unified super-app consolidating 3 separate legacy fitness apps (12M combined users) into one.
+          Infrastructure redesign cut costs by <strong>$2.3M/year</strong>. AWS backend supporting
+          50K+ concurrent users at 99.95% uptime with &lt;100ms p95 latency for 8M+ DAU.
+        </p>
+        <div class="proj-nums">
+          <div class="proj-num">$2.3M<span>Annual Savings</span></div>
+          <div class="proj-num">50K+<span>Concurrent Users</span></div>
+        </div>
+        <div class="proj-chips">
+          <span class="proj-chip">Kotlin</span>
+          <span class="proj-chip">AWS</span>
+          <span class="proj-chip">Android</span>
+          <span class="proj-chip">App Consolidation</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d3 tilt">
+        <div class="proj-icon">☁️</div>
+        <div class="proj-title">Cloud Emulator Infrastructure</div>
+        <div class="proj-co">Yahoo · Platform Engineering</div>
+        <p class="proj-desc">
+          Containerized Android emulator running on nested-virtualization GCE instances, driven over
+          an IAP tunnel. Serial-agnostic capture pipeline for automated UI testing at cloud scale —
+          enables headless Android test execution at Google Cloud speed without physical devices.
+        </p>
+        <div class="proj-chips">
+          <span class="proj-chip">GCP</span>
+          <span class="proj-chip">Nested Virt</span>
+          <span class="proj-chip">Docker</span>
+          <span class="proj-chip">IAP</span>
+          <span class="proj-chip">ADB</span>
+          <span class="proj-chip">Android Emulator</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<section id="companies" class="sec">
+  <div class="inner">
+    <div class="reveal">
+      <div class="s-label">Companies</div>
+      <h2 class="s-title">Where I've shipped.</h2>
+    </div>
+    <div class="co-grid">
+      <div class="co-card reveal d1">
+        <div class="co-name">Yahoo</div>
+        <div class="co-role">Senior Software Engineer</div>
+        <div class="co-date">2025 – Present</div>
+      </div>
+      <div class="co-card reveal d2">
+        <div class="co-name">Meta</div>
+        <div class="co-role">Staff Android Engineer</div>
+        <div class="co-date">Mar 2022 – Sep 2025</div>
+      </div>
+      <div class="co-card reveal d3">
+        <div class="co-name">Beachbody</div>
+        <div class="co-role">Principal Android Engineer</div>
+        <div class="co-date">Aug 2018 – Sep 2021</div>
+      </div>
+      <div class="co-card reveal d4">
+        <div class="co-name">Wag</div>
+        <div class="co-role">Staff Android Engineer</div>
+        <div class="co-date">Mar 2018 – Oct 2018</div>
+      </div>
+      <div class="co-card reveal d1">
+        <div class="co-name">TigerConnect</div>
+        <div class="co-role">Senior Android Engineer</div>
+        <div class="co-date">Oct 2016 – Sep 2017</div>
+      </div>
+      <div class="co-card reveal d2">
+        <div class="co-name">Disney</div>
+        <div class="co-role">Android Engineer</div>
+        <div class="co-date">Dec 2014 – Dec 2015</div>
+      </div>
+      <div class="co-card reveal d3">
+        <div class="co-name">Harvey AI LLC</div>
+        <div class="co-role">Founder · Engineering Consultancy</div>
+        <div class="co-date">Ongoing</div>
+      </div>
+      <div class="co-card reveal d4">
+        <div class="co-name">Toptal</div>
+        <div class="co-role">Top 3% Verified Expert Network</div>
+        <div class="co-date">2025 – Present</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec">
+  <div class="inner">
+    <div class="contact-wrap">
+      <div class="s-label reveal">Let's Work Together</div>
+      <h2 class="contact-title reveal">Ready to build<br>something legendary?</h2>
+      <p class="contact-desc reveal">
+        Available for senior engineering contracts via Harvey AI LLC.
+        I specialize in Android platforms, autonomous AI systems, and technical
+        leadership at scale. Vetted through Toptal's top 3% network.
+      </p>
+      <div class="contact-btns reveal">
+        <a href="https://www.toptal.com" target="_blank" rel="noopener" class="btn-p">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Hire via Toptal
+        </a>
+        <a href="mailto:bharv14@gmail.com" class="btn-s">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Send an Email
+        </a>
+      </div>
+      <div class="contact-meta reveal">
+        <a href="https://github.com/bharv410" target="_blank" rel="noopener" class="contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          bharv410
+        </a>
+        <a href="mailto:bharv14@gmail.com" class="contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          bharv14@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/benjaminharvey1" target="_blank" rel="noopener" class="contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="f-copy">© 2026 Benjamin Harvey · Harvey AI LLC</span>
+  <div class="f-links">
+    <a href="https://www.toptal.com" target="_blank" rel="noopener">Toptal</a>
+    <a href="https://github.com/bharv410" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/benjaminharvey1" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:bharv14@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+// SCROLL PROGRESS
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  prog.style.width = pct + '%';
+}, { passive: true });
+
+// CURSOR GLOW (desktop only)
+const cur = document.getElementById('cursor');
+if (window.matchMedia('(hover: hover)').matches) {
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+  });
+} else {
+  cur.style.display = 'none';
+}
+
+// PARTICLE SYSTEM
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let raf;
+const isMobile = window.innerWidth < 768;
+
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+
+class Particle {
+  constructor() { this.reset(true); }
+  reset(rand) {
+    this.x = Math.random() * canvas.width;
+    this.y = rand ? Math.random() * canvas.height : canvas.height + 5;
+    this.size = Math.random() * 1.4 + 0.3;
+    this.vx = (Math.random() - 0.5) * 0.35;
+    this.vy = -(Math.random() * 0.45 + 0.08);
+    this.life = 1;
+    this.decay = Math.random() * 0.0018 + 0.0008;
+    this.alpha = Math.random() * 0.45 + 0.08;
+    const r = Math.random();
+    this.color = r < 0.5 ? '79,127,255' : r < 0.82 ? '0,217,255' : '155,122,255';
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.life -= this.decay;
+    if (this.life <= 0 || this.y < -5) this.reset(false);
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color},${this.alpha * this.life})`;
+    ctx.fill();
+  }
+}
+
+function drawConnections() {
+  const len = particles.length;
+  for (let i = 0; i < len; i++) {
+    for (let j = i + 1; j < len; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 110) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(79,127,255,${(1 - d / 110) * 0.07})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function initParticles() {
+  particles = [];
+  const count = isMobile ? 50 : Math.min(Math.floor(canvas.width * canvas.height / 7500), 130);
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (!isMobile) drawConnections();
+  particles.forEach(p => { p.update(); p.draw(); });
+  raf = requestAnimationFrame(animate);
+}
+
+resizeCanvas();
+initParticles();
+animate();
+
+window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+
+// Stop animation when hero not visible (perf)
+const heroObs = new IntersectionObserver(([e]) => {
+  if (e.isIntersecting) { if (!raf) animate(); }
+  else { cancelAnimationFrame(raf); raf = null; }
+}, { threshold: 0 });
+heroObs.observe(document.getElementById('hero'));
+
+// SCROLL REVEAL
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+// ANIMATED COUNTERS
+function animCount(el) {
+  const target = parseInt(el.dataset.target);
+  const suf = el.dataset.suffix || '';
+  const pre = el.dataset.prefix || '';
+  const dur = 1600;
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - t, 4);
+    el.textContent = pre + Math.floor(ease * target).toLocaleString() + suf;
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.done) {
+      e.target.dataset.done = '1';
+      animCount(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.stat-val[data-target]').forEach(el => cntObs.observe(el));
+
+// CARD TILT
+document.querySelectorAll('.tilt').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.transition = 'transform .08s, border-color .3s, background .3s, box-shadow .3s';
+  });
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(900px) rotateX(${-y * 4.5}deg) rotateY(${x * 4.5}deg) translateZ(6px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transition = 'transform .5s cubic-bezier(0.4,0,0.2,1), border-color .3s, background .3s, box-shadow .3s';
+    card.style.transform = '';
+  });
+});
+
+// PARALLAX ORBS
+const hero = document.getElementById('hero');
+const orb1 = document.querySelector('.orb-1');
+const orb2 = document.querySelector('.orb-2');
+const orb3 = document.querySelector('.orb-3');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y < hero.offsetHeight * 1.2) {
+    orb1.style.transform = `translateY(${y * 0.22}px)`;
+    orb2.style.transform = `translateY(${y * 0.14}px)`;
+    orb3.style.transform = `translateY(${y * 0.18}px)`;
+  }
+}, { passive: true });
+
+// ACTIVE NAV
+const secs = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.n-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 160) cur = s.id; });
+  navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+}, { passive: true });
+
+// HERO NAME GLITCH ON LOAD
+const nameEl = document.querySelector('.h-name');
+const nameOrig = nameEl.textContent;
+const gChars = '!<>-_\\/[]{}—=+*^?#@';
+let gTimer;
+function glitch() {
+  let iter = 0;
+  clearInterval(gTimer);
+  gTimer = setInterval(() => {
+    nameEl.textContent = nameOrig.split('').map((c, i) => {
+      if (c === ' ') return ' ';
+      if (i < iter) return nameOrig[i];
+      return gChars[Math.floor(Math.random() * gChars.length)];
+    }).join('');
+    iter++;
+    if (iter > nameOrig.length) {
+      nameEl.textContent = nameOrig;
+      clearInterval(gTimer);
+    }
+  }, 28);
+}
+setTimeout(glitch, 500);
+</script>
+</body>
+</html>
