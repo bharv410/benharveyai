@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hundo — Reset your password</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; background: #0B120D; color: #EAF2EC;
+         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         line-height: 1.65; }
+  .wrap { max-width: 420px; margin: 0 auto; padding: 64px 24px 80px; }
+  h1 { font-family: Georgia, "Times New Roman", serif; color: #16A34A; font-size: 28px; }
+  .muted { color: rgba(234,242,236,0.55); font-size: 14px; }
+  input { width: 100%; box-sizing: border-box; padding: 14px; margin: 8px 0; border-radius: 10px;
+          border: 1px solid rgba(234,242,236,0.2); background: #111A14; color: #EAF2EC; font-size: 16px; }
+  button { width: 100%; margin-top: 16px; padding: 16px; border: 0; border-radius: 12px;
+           background: #16A34A; color: #0B120D; font-weight: 700; font-size: 16px; cursor: pointer; }
+  button:disabled { opacity: 0.4; }
+  .err { color: #FF6B5E; font-size: 14px; margin-top: 12px; }
+  .ok  { color: #16A34A; font-size: 15px; margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Reset your password</h1>
+  <p id="status" class="muted">Checking your reset link…</p>
+  <form id="form" style="display:none">
+    <input id="pw" type="password" placeholder="New password (8+ characters)" minlength="8" autocomplete="new-password" required />
+    <input id="pw2" type="password" placeholder="Repeat new password" minlength="8" autocomplete="new-password" required />
+    <button id="btn" type="submit">Set new password</button>
+  </form>
+  <p id="err" class="err"></p>
+  <p id="ok" class="ok"></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const client = supabase.createClient(
+  "https://ulkkfrozucyzisunmvbt.supabase.co",
+  "sb_publishable_7hmJTqqd-tpquUf_VMycxQ_5-FT90SD",
+  { auth: { detectSessionInUrl: true, flowType: "implicit" } }
+);
+const status = document.getElementById("status");
+const form = document.getElementById("form");
+const err = document.getElementById("err");
+const ok = document.getElementById("ok");
+
+client.auth.onAuthStateChange((event) => {
+  if (event === "PASSWORD_RECOVERY") {
+    status.textContent = "Link verified. Choose a new password.";
+    form.style.display = "block";
+  }
+});
+// Fallback: if no recovery session is detected shortly, the link is stale/invalid.
+setTimeout(async () => {
+  const { data } = await client.auth.getSession();
+  if (!data.session && form.style.display === "none") {
+    status.textContent = "This reset link is expired or already used. In the Hundo app, tap \"Forgot password?\" again for a fresh link.";
+  }
+}, 5000);
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  err.textContent = ""; ok.textContent = "";
+  const a = document.getElementById("pw").value, b = document.getElementById("pw2").value;
+  if (a !== b) { err.textContent = "Passwords don't match."; return; }
+  document.getElementById("btn").disabled = true;
+  const { error } = await client.auth.updateUser({ password: a });
+  document.getElementById("btn").disabled = false;
+  if (error) { err.textContent = error.message; return; }
+  form.style.display = "none";
+  status.textContent = "Done.";
+  ok.textContent = "Password updated. Open the Hundo app and sign in with your new password.";
+});
+</script>
+</body>
+</html>
