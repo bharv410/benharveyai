@@ -1,0 +1,79 @@
+/* Money IQ — web. Base theme, ported from benharveyfit-ai's web/styles.css structure and
+   recolored to match the app's Theme (dark green) and the live privacy policy at
+   benharveyai.com/moneyiq-privacy.html: near-black green background, one emerald accent,
+   Georgia serif headlines, system sans body. One accent. No second color. */
+
+:root {
+  --bg:        #0B120D;  /* near-black green */
+  --surface:   #121B14;  /* lifted card/tile */
+  --surface-hi:#182417;
+  --green:     #16A34A;  /* the one and only accent */
+  --green-text:#22C55E;  /* same accent, brighter — for small functional text (WCAG AA) */
+  --green-mid: rgba(22, 163, 74, 0.50);
+  --green-ghost:rgba(22, 163, 74, 0.16);
+  --text:   #EAF2EC;
+  --text70: rgba(234, 242, 236, 0.72);
+  --text45: rgba(234, 242, 236, 0.58);
+  --text25: rgba(234, 242, 236, 0.25);
+  --hairline: rgba(255, 255, 255, 0.08);
+  --corner: 14px;
+  --tile-corner: 10px;
+  --pad: 16px;
+  --display: Georgia, "Times New Roman", serif;
+  --body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+}
+
+/* Faint wash so the black isn't flat. */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(22,163,74,0.08), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0 1px, transparent 1px 3px);
+  opacity: 0.9;
+}
+
+.wrap { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; padding: 28px 20px 64px; }
+
+a { color: var(--green-text); }
+
+.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+/* ── Buttons ──────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 24px; border-radius: 12px; font-family: var(--body); font-weight: 600;
+  font-size: 15px; text-decoration: none; color: var(--bg); background: var(--green);
+  border: 1px solid var(--green); transition: transform .06s ease, filter .15s ease;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn:active { transform: translateY(1px); }
+.btn.ghost { background: transparent; color: var(--text); border-color: var(--hairline); }
+.btn.ghost:hover { border-color: var(--green-mid); color: var(--green-text); }
+.btn.small { padding: 10px 18px; font-size: 13px; }
+.btn.full { width: 100%; }
+
+/* App Store badge — drawn in CSS, no asset needed. Links to the real listing. */
+.appstore-btn {
+  display: inline-flex; align-items: center; gap: 12px; padding: 13px 22px; border-radius: 13px;
+  background: var(--text); color: #0c0b0a; text-decoration: none;
+  transition: transform .06s ease, filter .15s ease;
+}
+.appstore-btn:hover { filter: brightness(0.94); }
+.appstore-btn:active { transform: translateY(1px); }
+.appstore-btn svg { width: 26px; height: 26px; flex: none; }
+.appstore-btn .as-txt { display: flex; flex-direction: column; line-height: 1.05; text-align: left; }
+.appstore-btn .as-sm { font-size: 11px; font-weight: 600; letter-spacing: 0.02em; }
+.appstore-btn .as-lg { font-family: var(--body); font-weight: 700; font-size: 19px; letter-spacing: 0.01em; }
+.appstore-btn.full { width: 100%; justify-content: center; }
