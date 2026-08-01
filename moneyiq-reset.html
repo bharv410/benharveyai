@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hundo — Reset your password</title>
+<title>BHarv Finance AI — Reset your password</title>
 <style>
   :root { color-scheme: dark; }
   body { margin: 0; background: #0B120D; color: #EAF2EC;
@@ -55,7 +55,7 @@ client.auth.onAuthStateChange((event) => {
 setTimeout(async () => {
   const { data } = await client.auth.getSession();
   if (!data.session && form.style.display === "none") {
-    status.textContent = "This reset link is expired or already used. In the Hundo app, tap \"Forgot password?\" again for a fresh link.";
+    status.textContent = "This reset link is expired or already used. In the BHarv Finance AI app, tap \"Forgot password?\" again for a fresh link.";
   }
 }, 5000);
 
@@ -70,7 +70,7 @@ form.addEventListener("submit", async (e) => {
   if (error) { err.textContent = error.message; return; }
   form.style.display = "none";
   status.textContent = "Done.";
-  ok.textContent = "Password updated. Open the Hundo app and sign in with your new password.";
+  ok.textContent = "Password updated. Open the BHarv Finance AI app and sign in with your new password.";
 });
 </script>
 </body>
