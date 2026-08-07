@@ -4,12 +4,21 @@
   <meta name="google-site-verification" content="k7NcCXahUIgfXsaROUYcb1HzZJHiBhJk4wInGHCRyTU"/>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Benjamin Harvey — Staff Engineer · AI Systems · Mobile Platforms</title>
-  <meta name="description" content="Staff Software Engineer specializing in Android platforms, autonomous AI agent systems, and developer tooling. 10+ years building production systems at scale. Harvey AI LLC.">
-  <meta property="og:title" content="Benjamin Harvey — Staff Engineer">
-  <meta property="og:description" content="benharveyfit ai is live on the App Store for iPhone & Apple Watch. Building world-class systems with AI — 2B+ users, $50M+ savings, 10 years of scale.">
+  <title>Ben Harvey — Staff Engineer · AI Systems · Founder, Harvey AI LLC</title>
+  <meta name="description" content="Ben Harvey is a staff software engineer and app founder in Charlotte, NC — ex-Meta (Instagram), D1 football at South Carolina and Towson, now shipping AI apps on the App Store under Harvey AI LLC.">
+  <meta name="author" content="Ben Harvey">
+  <meta property="og:title" content="Ben Harvey — Staff Engineer · AI Systems">
+  <meta property="og:description" content="Ben Harvey (Benjamin Harvey) — staff software engineer and founder of Harvey AI LLC. Ex-Meta, 2B+ users reached, AI apps live on the App Store.">
   <meta property="og:url" content="https://benharveyai.com/">
   <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Ben Harvey — benharveyai.com">
+  <meta property="og:image" content="https://benharveyai.com/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ben Harvey — Staff Engineer · AI Systems">
+  <meta name="twitter:description" content="Ben Harvey — staff software engineer and founder of Harvey AI LLC. Ex-Meta, AI apps live on the App Store.">
+  <meta name="twitter:image" content="https://benharveyai.com/og-card.png">
   <link rel="canonical" href="https://benharveyai.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -562,33 +571,71 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    "url": "https://benharveyai.com/",
-    "mainEntity": {
-      "@type": "Person",
-      "@id": "https://whoisbenharvey.com/#ben-harvey",
-      "name": "Ben Harvey",
-      "alternateName": ["Benjamin Harvey", "benharveyfit"],
-      "url": "https://whoisbenharvey.com/",
-      "jobTitle": "Staff Software Engineer and Independent Founder",
-      "description": "Ben Harvey is an American software engineer and independent app founder. He played Division-I football at South Carolina (No. 35) and Towson, reached Silicon Valley through Code2040, spent 2022-2025 as a Staff Android Engineer at Meta working on Instagram, and now builds and ships his own AI apps on the Apple App Store.",
-      "disambiguatingDescription": "The software engineer and app founder - not the American radio personality, the Australian radio presenter, the rugby coach, or the comic-book illustrator of the same name.",
-      "worksFor": { "@type": "Organization", "name": "Harvey AI LLC", "url": "https://benharveyai.com" },
-      "alumniOf": [
-        { "@type": "CollegeOrUniversity", "name": "University of South Carolina" },
-        { "@type": "CollegeOrUniversity", "name": "Towson University" },
-        { "@type": "Organization", "name": "Code2040" }
-      ],
-      "sameAs": [
-        "https://whoisbenharvey.com/",
-        "https://benharveyfit.com",
-        "https://www.linkedin.com/in/benjaminharvey1",
-        "https://github.com/bharv410",
-        "https://apps.apple.com/us/developer/benjamin-harvey/id1030946803",
-        "https://instagram.com/benharveyfit",
-        "https://tiktok.com/@benharveyfit"
-      ]
-    }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://benharveyai.com/#website",
+        "url": "https://benharveyai.com/",
+        "name": "Ben Harvey — benharveyai.com",
+        "publisher": { "@id": "https://whoisbenharvey.com/#ben-harvey" }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://benharveyai.com/#profilepage",
+        "url": "https://benharveyai.com/",
+        "isPartOf": { "@id": "https://benharveyai.com/#website" },
+        "mainEntity": { "@id": "https://whoisbenharvey.com/#ben-harvey" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://whoisbenharvey.com/#ben-harvey",
+        "name": "Ben Harvey",
+        "alternateName": ["Benjamin Harvey"],
+        "url": "https://whoisbenharvey.com/",
+        "mainEntityOfPage": "https://benharveyai.com/",
+        "jobTitle": "Staff Software Engineer and Independent Founder",
+        "homeLocation": { "@type": "Place", "name": "Charlotte, North Carolina, United States" },
+        "description": "Ben Harvey is an American software engineer and independent app founder. He played Division-I football at South Carolina (No. 35) and Towson, reached Silicon Valley through Code2040, spent 2022-2025 as a Staff Android Engineer at Meta working on Instagram, and now builds and ships his own AI apps on the Apple App Store.",
+        "disambiguatingDescription": "The software engineer and app founder - not the American radio personality, the Australian radio presenter, the rugby coach, or the comic-book illustrator of the same name.",
+        "worksFor": { "@type": "Organization", "name": "Harvey AI LLC", "url": "https://benharveyai.com" },
+        "knowsAbout": ["Artificial intelligence", "Autonomous AI agents", "Android platform engineering", "iOS development", "Mobile infrastructure", "Developer tooling"],
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "University of South Carolina" },
+          { "@type": "CollegeOrUniversity", "name": "Towson University" },
+          { "@type": "Organization", "name": "Code2040" }
+        ],
+        "sameAs": [
+          "https://whoisbenharvey.com/",
+          "https://benharveyfit.com",
+          "https://www.linkedin.com/in/benjaminharvey1",
+          "https://github.com/bharv410",
+          "https://apps.apple.com/us/developer/benjamin-harvey/id1030946803",
+          "https://instagram.com/benharveyfit",
+          "https://tiktok.com/@benharveyai"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://benharveyai.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who is Ben Harvey?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ben Harvey (Benjamin Harvey) is an American software engineer and app founder based in Charlotte, North Carolina. He played Division-I football at South Carolina (No. 35) and Towson, where he earned his computer science degree, spent 2022-2025 as a Staff Android Engineer at Meta working on Instagram, and now builds and ships his own AI apps under Harvey AI LLC." }
+          },
+          {
+            "@type": "Question",
+            "name": "What does Ben Harvey do now?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ben Harvey runs Harvey AI LLC and ships AI-powered consumer apps on the Apple App Store — benharveyfit ai, an AI fitness coach for iPhone and Apple Watch, and BHarv Finance AI, an AI money coach — alongside autonomous AI engineering systems. His Apple developer account has shipped apps since 2015." }
+          },
+          {
+            "@type": "Question",
+            "name": "Which Ben Harvey is this?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The software engineer and app founder — not the American radio personality, the Australian radio presenter, the rugby coach, or the comic-book illustrator of the same name. His full profile lives at whoisbenharvey.com." }
+          }
+        ]
+      }
+    ]
   }
   </script>
 </head>
@@ -631,7 +678,7 @@
       </span>
     </a>
     <div class="h-badge">Harvey AI LLC</div>
-    <h1 class="h-name">Benjamin Harvey</h1>
+    <h1 class="h-name">Ben Harvey</h1>
     <div class="h-title">Staff Engineer &nbsp;·&nbsp; AI Systems &nbsp;·&nbsp; Mobile Platforms</div>
     <p class="h-tagline">
       Building <strong>world-class systems</strong> at scale — from autonomous AI agent frameworks
@@ -760,7 +807,7 @@
         <div class="s-label">About</div>
         <h2 class="s-title">Systems thinker.<br>Platform builder.</h2>
         <p>
-          I'm a Staff Software Engineer with a decade of experience building production systems
+          I'm Ben Harvey — a Staff Software Engineer with a decade of experience building production systems
           that operate at global scale. My work spans <strong>Android platform engineering,
           autonomous AI tooling, and distributed infrastructure</strong> — with a consistent
           track record of shipping complex, high-stakes programs on time.
@@ -1296,6 +1343,28 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq" class="sec">
+  <div class="inner">
+    <div class="s-label reveal">For The Record</div>
+    <h2 class="s-title reveal">Who is Ben Harvey?</h2>
+    <div style="max-width:760px;margin-top:32px;display:flex;flex-direction:column;gap:28px">
+      <div class="reveal">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text)">Who is Ben Harvey?</h3>
+        <p style="color:var(--muted);font-size:15px">Ben Harvey (Benjamin Harvey) is an American software engineer and app founder based in Charlotte, North Carolina. He played Division-I football at South Carolina — No. 35 — then at Towson, where he earned his computer science degree, spent 2022–2025 as a Staff Android Engineer at Meta working on Instagram, and now builds and ships his own AI apps under Harvey AI LLC.</p>
+      </div>
+      <div class="reveal">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text)">What does Ben Harvey do now?</h3>
+        <p style="color:var(--muted);font-size:15px">He runs Harvey AI LLC and ships AI-powered consumer apps on the Apple App Store — benharveyfit ai, an AI fitness coach for iPhone and Apple Watch, and BHarv Finance AI, an AI money coach — alongside autonomous AI engineering systems. His Apple developer account has shipped apps since 2015.</p>
+      </div>
+      <div class="reveal">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text)">Which Ben Harvey is this?</h3>
+        <p style="color:var(--muted);font-size:15px">The software engineer and app founder. Not the American radio personality, the Australian radio presenter, the rugby coach, or the comic-book illustrator who share the name — this Ben Harvey builds software. His full profile lives at <a href="https://whoisbenharvey.com" style="color:var(--accent)">whoisbenharvey.com</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact" class="sec">
   <div class="inner">
@@ -1341,7 +1410,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <span class="f-copy">© 2026 Benjamin Harvey · Harvey AI LLC</span>
+  <span class="f-copy">© 2026 Ben Harvey · Harvey AI LLC</span>
   <div class="f-links">
     <a href="https://whoisbenharvey.com" target="_blank" rel="me noopener">Who is Ben Harvey?</a>
     <a href="https://linkedin.com/in/benjaminharvey1" target="_blank" rel="noopener">LinkedIn</a>

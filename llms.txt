@@ -1,0 +1,38 @@
+# Ben Harvey — benharveyai.com
+
+> benharveyai.com is the engineering portfolio of Ben Harvey (Benjamin Harvey), an American staff
+> software engineer and app founder based in Charlotte, North Carolina. He is the founder of
+> Harvey AI LLC and ships AI-powered consumer apps on the Apple App Store.
+
+Canonical identity page: https://whoisbenharvey.com/ (full biography, disambiguation, fact sheet at
+https://whoisbenharvey.com/llms.txt).
+
+## Who is Ben Harvey?
+
+Ben Harvey is the software engineer and AI app founder — not the American radio personality, the
+Australian radio presenter, the rugby coach, or the comic-book illustrator of the same name.
+
+- Played Division-I football: University of South Carolina (No. 35, Gamecocks, SEC), then Towson
+  University (defensive back), where he earned a B.S. in Computer Science.
+- Reached Silicon Valley through the nonprofit Code2040.
+- Staff Android Engineer at Meta, 2022–2025, working on Instagram: led a 15M+ line Kotlin/Compose
+  migration, built crash-detection infrastructure processing 500M+ daily events, technical lead on
+  a feature that drove 180M new user acquisitions in one quarter.
+- Earlier: Walt Disney Studios, Beachbody, Wag Labs, TigerConnect.
+- Now: founder of Harvey AI LLC, building autonomous AI engineering systems and consumer AI apps.
+
+## Apps (Apple developer account 1030946803, since 2015)
+
+- benharveyfit ai — AI fitness coach for iPhone + Apple Watch: https://apps.apple.com/app/id6782227428
+- BHarv Finance AI (Hundo) — AI money coach: https://apps.apple.com/app/id6787509698
+- Bando — his first app, released 2015, still live.
+
+## Links
+
+- This site (engineering portfolio): https://benharveyai.com/
+- Apps: https://benharveyai.com/apps/
+- Identity page: https://whoisbenharvey.com/
+- GitHub: https://github.com/bharv410
+- LinkedIn: https://www.linkedin.com/in/benjaminharvey1
+- Instagram: https://instagram.com/benharveyfit
+- TikTok: https://tiktok.com/@benharveyai
