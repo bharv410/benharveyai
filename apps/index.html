@@ -74,6 +74,11 @@
       width:60px; height:60px; border-radius:14px; flex-shrink:0;
       box-shadow:0 6px 22px -8px rgba(0,0,0,.7), inset 0 0 0 .5px rgba(255,255,255,.12);
     }
+    .icon.glyph{
+      display:flex; align-items:center; justify-content:center;
+      background:rgba(255,255,255,.035); font-family:var(--display);
+      font-size:29px; line-height:1; color:var(--sub); padding-bottom:3px;
+    }
     .body{flex:1; min-width:0; padding-top:1px}
     .name{font-size:18px; font-weight:700; letter-spacing:-.01em}
     .tag{font-size:14px; color:var(--sub); margin-top:3px; line-height:1.4}
@@ -93,13 +98,21 @@
       text-transform:uppercase; color:#39d98a; margin-left:10px; vertical-align:middle;
       padding:3px 8px; border:1px solid rgba(57,217,138,.3); border-radius:999px; background:rgba(57,217,138,.08);
     }
-    .inapp-hint{
-      display:none; margin:-22px 0 36px; padding:13px 15px; border-radius:12px;
-      border:1px solid rgba(255,180,0,.28); background:rgba(255,180,0,.06);
-      font-size:12.5px; line-height:1.5; color:var(--sub);
+    /* near-invisible "hold here" affordance — touch devices only */
+    .hold{
+      display:none; align-items:center; gap:5px; margin-left:3px;
+      font-size:11px; font-weight:600; letter-spacing:.06em;
+      color:var(--faint); opacity:.34; transition:.28s var(--ease);
     }
-    .inapp-hint.show{display:block}
-    .inapp-hint b{color:var(--ink); font-weight:600}
+    .hold svg{width:14px; height:14px; flex-shrink:0}
+    .hold .ring{transform-origin:12px 8px; animation:tap 3s var(--ease) infinite}
+    @keyframes tap{0%,68%,100%{opacity:0;transform:scale(.55)}14%{opacity:.85;transform:scale(1)}42%{opacity:0;transform:scale(1.25)}}
+    body.touch .appstore .hold{display:inline-flex}
+    body.touch .appstore .cta .arw{display:none}
+    .card.holding .hold{opacity:1; color:#fff}
+    .card.holding .hold .ring{animation:none; opacity:.9; transform:none}
+    .hold.nudge{opacity:.85; color:var(--ink)}
+    @media(prefers-reduced-motion:reduce){.hold .ring{animation:none;opacity:.7}}
     footer{margin-top:46px; font-size:12.5px; color:var(--faint)}
     footer a{color:var(--faint); text-decoration:none; border-bottom:1px solid var(--line); transition:.2s}
     footer a:hover{color:var(--ink); border-color:var(--line-h)}
@@ -146,15 +159,11 @@
   <div class="col">
     <header class="r">
       <div class="eyebrow">Built by Ben Harvey</div>
-      <h1>Two apps.<br><em>One mission.</em></h1>
+      <h1>Finance.<br>Fitness.<br><em>Faith.</em></h1>
       <div class="path"><b>Disney</b><span>→</span><b>Meta</b><span>→</span><b>Building AI</b></div>
     </header>
 
-    <div class="inapp-hint" id="inappHint">
-      <b>📲 To install:</b> <b>press &amp; hold</b> the <b>Download on the App Store</b> button below, then tap <b>Open Link</b>. No menu? Tap <b>•••</b> (top-right) → <b>Open in Browser</b> first, then hit download.
-    </div>
-
-    <a class="card featured r" href="https://apps.apple.com/us/app/id6787509698" rel="noopener">
+    <a class="card featured appstore r" href="https://apps.apple.com/us/app/id6787509698" rel="noopener">
       <div class="row">
         <img class="icon" src="icon-hundo.png" width="60" height="60" alt="BHarv Finance AI/Hundo app icon">
         <div class="body">
@@ -166,10 +175,17 @@
       <p class="blurb">Your finances, finally handled. BHarv Finance AI reads your real spending, spots the leaks, and coaches you toward your goals — in plain conversation, not spreadsheets.</p>
       <span class="cta">Download on the App Store
         <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="hold" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path class="ring" d="M6.5 4.5a7 7 0 0 1 11 0M9 7.2a3.6 3.6 0 0 1 6 0"/>
+            <path d="M11 10.5v5.2L9.4 14a1.4 1.4 0 0 0-2 2l3.3 4a3.4 3.4 0 0 0 2.6 1.2h2.3a3.4 3.4 0 0 0 3.4-3.4v-3.5a1.4 1.4 0 0 0-2.8 0 1.4 1.4 0 0 0-2.8 0 1.4 1.4 0 0 0-2.8 0v-3.8a1.3 1.3 0 0 0-2.6 0Z"/>
+          </svg>
+          <span class="holdtxt">hold</span>
+        </span>
       </span>
     </a>
 
-    <a class="card r" href="https://apps.apple.com/us/app/id6782227428" rel="noopener">
+    <a class="card appstore r" href="https://apps.apple.com/us/app/id6782227428" rel="noopener">
       <div class="row">
         <img class="icon" src="icon-fit.png" width="60" height="60" alt="benharveyfit app icon">
         <div class="body">
@@ -180,6 +196,28 @@
       </div>
       <p class="blurb">An AI fitness coach that adapts to you — training, nutrition, and accountability that meet you where you are and push you forward.</p>
       <span class="cta">Download on the App Store
+        <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="hold" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path class="ring" d="M6.5 4.5a7 7 0 0 1 11 0M9 7.2a3.6 3.6 0 0 1 6 0"/>
+            <path d="M11 10.5v5.2L9.4 14a1.4 1.4 0 0 0-2 2l3.3 4a3.4 3.4 0 0 0 2.6 1.2h2.3a3.4 3.4 0 0 0 3.4-3.4v-3.5a1.4 1.4 0 0 0-2.8 0 1.4 1.4 0 0 0-2.8 0 1.4 1.4 0 0 0-2.8 0v-3.8a1.3 1.3 0 0 0-2.6 0Z"/>
+          </svg>
+          <span class="holdtxt">hold</span>
+        </span>
+      </span>
+    </a>
+
+    <a class="card r" href="https://x.com/faithwillsaveu" target="_blank" rel="noopener">
+      <div class="row">
+        <div class="icon glyph" aria-hidden="true">✟</div>
+        <div class="body">
+          <div class="name">Faith Alone Saves</div>
+          <div class="tag">Scripture, daily · @faithwillsaveu</div>
+          <div class="rate">X (Twitter)</div>
+        </div>
+      </div>
+      <p class="blurb">The other half of the mission. Short, direct posts on faith — the same voice behind the videos.</p>
+      <span class="cta">Follow on X
         <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </a>
@@ -192,29 +230,48 @@
       var iOS = /iPhone|iPad|iPod/i.test(ua);
       var inApp = /Instagram|FBAN|FBAV|FB_IAB|Messenger|TikTok|musical_ly|BytedanceWebview|Line\/|Snapchat|GSA\//i.test(ua)
                   || (iOS && !/Safari/i.test(ua)); // iOS webview w/o Safari token = in-app browser
-      var links = document.querySelectorAll('a.card');
+      var touch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+      var links = document.querySelectorAll('a.card.appstore');
 
-      if (inApp) {
-        document.getElementById('inappHint').classList.add('show');
+      // show the faded "hold" affordance only on touch devices
+      if (touch) document.body.classList.add('touch');
+
+      links.forEach(function(a){
+        var url  = a.getAttribute('href');
+        var hint = a.querySelector('.hold');
+        var txt  = a.querySelector('.holdtxt');
+        var t;
+
+        // long-press feedback: the hint lights up and tells them what to tap
+        a.addEventListener('touchstart', function(){
+          t = setTimeout(function(){
+            a.classList.add('holding');
+            if (txt) txt.textContent = 'tap Open Link';
+          }, 340);
+        }, {passive:true});
+
+        ['touchend','touchcancel','touchmove'].forEach(function(ev){
+          a.addEventListener(ev, function(){
+            clearTimeout(t);
+            a.classList.remove('holding');
+            if (txt) txt.textContent = 'hold';
+          }, {passive:true});
+        });
+
         // iOS in-app browsers block App Store links. x-safari- forces a break-out to Safari.
-        if (iOS) {
-          links.forEach(function(a){
-            var url = a.getAttribute('href');
-            a.addEventListener('click', function(e){
-              e.preventDefault();
-              window.location.href = 'x-safari-' + url;      // try to jump to Safari
-              // if we're still here shortly after, the OS blocked it — surface the manual step
-              setTimeout(function(){
-                var h = document.getElementById('inappHint');
-                h.classList.add('show');
-                h.scrollIntoView({behavior:'smooth', block:'center'});
-              }, 700);
-            });
+        if (inApp && iOS) {
+          a.addEventListener('click', function(e){
+            e.preventDefault();
+            window.location.href = 'x-safari-' + url;   // try to jump to Safari
+            // still here a moment later? the OS blocked it — brighten the hold hint
+            setTimeout(function(){
+              if (!hint) return;
+              hint.classList.add('nudge');
+              if (txt) txt.textContent = 'hold, then Open Link';
+            }, 700);
           });
         }
-      } else {
-        // Safari/Chrome: link works normally; nothing to do.
-      }
+      });
     })();
   </script>
 </body>
