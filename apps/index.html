@@ -91,6 +91,7 @@
       transition:.25s var(--ease);
     }
     .cta svg{width:15px;height:15px}
+    .cta.noblurb{margin-top:18px}   /* card has no blurb — keep the CTA off the meta rows */
     .cta .arw{transition:.3s var(--ease)}
     .card:hover .cta .arw{transform:translateX(4px)}
     .featured .name::after{
@@ -212,12 +213,11 @@
         <div class="icon glyph" aria-hidden="true">✟</div>
         <div class="body">
           <div class="name">Faith Alone Saves</div>
-          <div class="tag">Scripture, daily · @faithwillsaveu</div>
+          <div class="tag">@faithwillsaveu</div>
           <div class="rate">X (Twitter)</div>
         </div>
       </div>
-      <p class="blurb">The other half of the mission. Short, direct posts on faith — the same voice behind the videos.</p>
-      <span class="cta">Follow on X
+      <span class="cta noblurb">Follow on X
         <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </span>
     </a>
