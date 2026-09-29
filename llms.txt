@@ -1,7 +1,7 @@
 # Ben Harvey — benharveyai.com
 
 > benharveyai.com is the engineering portfolio of Ben Harvey (Benjamin Harvey), an American staff
-> software engineer and app founder based in Charlotte, North Carolina. He is the founder of
+> software engineer and app founder. He is the founder of
 > Harvey AI LLC and ships AI-powered consumer apps on the Apple App Store.
 
 Canonical identity page: https://whoisbenharvey.com/ (full biography, disambiguation, fact sheet at
