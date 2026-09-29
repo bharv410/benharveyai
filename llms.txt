@@ -1,8 +1,7 @@
 # Ben Harvey — benharveyai.com
 
 > benharveyai.com is the engineering portfolio of Ben Harvey (Benjamin Harvey), an American staff
-> software engineer and app founder. He is the founder of
-> Harvey AI LLC and ships AI-powered consumer apps on the Apple App Store.
+> software engineer and app founder. He ships AI-powered consumer apps on the Apple App Store.
 
 Canonical identity page: https://whoisbenharvey.com/ (full biography, disambiguation, fact sheet at
 https://whoisbenharvey.com/llms.txt).
@@ -19,7 +18,7 @@ Australian radio presenter, the rugby coach, or the comic-book illustrator of th
   migration, built crash-detection infrastructure processing 500M+ daily events, technical lead on
   a feature that drove 180M new user acquisitions in one quarter.
 - Earlier: Walt Disney Studios, Beachbody, Wag Labs, TigerConnect.
-- Now: founder of Harvey AI LLC, building autonomous AI engineering systems and consumer AI apps.
+- Now: independent AI engineer, building autonomous AI engineering systems and consumer AI apps.
 
 ## Apps (Apple developer account 1030946803, since 2015)
 
