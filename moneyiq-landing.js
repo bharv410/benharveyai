@@ -117,3 +117,31 @@
     }
   }
 })();
+
+// Email capture → Supabase `web_leads` (anon INSERT-only; the publishable key is safe in a client).
+(function () {
+  var URL_ = 'https://ulkkfrozucyzisunmvbt.supabase.co/rest/v1/web_leads';
+  var KEY = 'sb_publishable_7hmJTqqd-tpquUf_VMycxQ_5-FT90SD';
+  var RE = /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i;
+  Array.prototype.forEach.call(document.querySelectorAll('.lead-form'), function (f) {
+    var input = f.querySelector('.lead-input'), btn = f.querySelector('button'), msg = f.querySelector('.lead-msg');
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = (input.value || '').trim().toLowerCase();
+      f.classList.remove('err');
+      if (!RE.test(email)) { f.classList.add('err'); msg.textContent = 'That email doesn\u2019t look right.'; return; }
+      btn.disabled = true;
+      fetch(URL_, {
+        method: 'POST',
+        headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({ email: email, source: f.getAttribute('data-src') || 'landing', consent: 'web_v1' })
+      }).then(function (r) {
+        // 409 = this address is already on the list — same outcome for the visitor.
+        if (r.ok || r.status === 409) { f.classList.add('done'); msg.textContent = 'You\u2019re in. Watch your inbox.'; }
+        else throw new Error(String(r.status));
+      }).catch(function () {
+        btn.disabled = false; f.classList.add('err'); msg.textContent = 'Couldn\u2019t save that. Try again.';
+      });
+    });
+  });
+})();

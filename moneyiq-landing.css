@@ -145,3 +145,16 @@ html.js .reveal.in { opacity: 1; transform: none; }
 .social-row { display: flex; gap: 18px; flex-wrap: wrap; }
 .social-row a { display: inline-flex; align-items: center; gap: 6px; border-bottom: none; }
 .social-row svg { width: 16px; height: 16px; }
+
+/* ── Email capture (web_leads) ─────────────────────────────── */
+.lead-form { margin-top: 26px; max-width: 500px; }
+.center .lead-form { margin-left: auto; margin-right: auto; }
+.lead-label { display: block; color: var(--text70); font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.lead-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.lead-input { flex: 1 1 220px; min-width: 0; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--hairline); background: transparent; color: var(--text); font: inherit; font-size: 16px; }
+.lead-input:focus { outline: none; border-color: var(--green-mid); }
+.lead-input::placeholder { color: var(--text45); }
+.lead-msg { margin-top: 10px; color: var(--text45); font-size: 12.5px; }
+.lead-form.done .lead-row { display: none; }
+.lead-form.done .lead-msg { color: var(--green-text); font-size: 15px; font-weight: 600; }
+.lead-form.err .lead-msg { color: #F87171; }
