@@ -1,0 +1,24 @@
+# Ben Harvey — benharveyai.com
+
+> benharveyai.com is the engineering portfolio of Ben Harvey (Benjamin Harvey), an American senior
+> software engineer. He ships AI-powered consumer apps on the Apple App Store.
+
+## About
+
+- Studied computer science at Towson (2011–2014).
+- Senior Android Engineer at Meta, 2022–2025, working on Instagram: Kotlin + Jetpack Compose
+  migration, crash detection and analysis tooling.
+- Earlier: Walt Disney Studios, Beachbody, Wag Labs, TigerConnect.
+- Now: building AI developer tooling and AI-powered consumer apps.
+
+## Apps
+
+- Fitness IQ — AI fitness coach for iPhone + Apple Watch: https://apps.apple.com/app/id6782227428
+- Money IQ — AI money coach: https://apps.apple.com/app/id6787509698
+
+## Links
+
+- This site (engineering portfolio): https://benharveyai.com/
+- Apps: https://benharveyai.com/apps/
+- GitHub: https://github.com/bharv410
+- LinkedIn: https://www.linkedin.com/in/benjaminharvey1
